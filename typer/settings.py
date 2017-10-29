@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'typer_app.apps.TyperAppConfig',
+    'registration',
     'bootstrap3',
     # 'djangoforandroid.builder',
     # 'djangoforandroid.mdl',  # optional, for mdl support
@@ -158,6 +159,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'apk')
+
+#Registration
+ACCOUNT_ACTIVATION_DAYS = 7
+REGISTRATION_AUTO_LOGIN = True
+
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
