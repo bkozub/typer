@@ -163,6 +163,16 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'apk')
 #Registration
 ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
+LOGIN_REDIRECT_URL = '/'
+
+#Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = 'bartikus1994@gmail.com'
+EMAIL_HOST_PASSWORD = '4ej7ozwr'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = "typer@mytyper.com"
 
 
 STATICFILES_DIRS = [
