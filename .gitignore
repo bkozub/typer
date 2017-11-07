@@ -1,5 +1,5 @@
 #Files:
 *.pyc
-
+typer/settings.ini
 #Folders:
 .idea/
