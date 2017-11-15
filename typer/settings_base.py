@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+from typer.helpers.ConfigParser import ConfigParser
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['192.168.1.108','192.168.1.109','192.168.1.100','127.0.0.1']
 
+# AUTH_USER_MODEL = ''
 
 # Application definition
 
@@ -40,9 +42,6 @@ INSTALLED_APPS = [
     'typer_app.apps.TyperAppConfig',
     'registration',
     'bootstrap3',
-    # 'djangoforandroid.builder',
-    # 'djangoforandroid.mdl',  # optional, for mdl support
-    # 'djangoforandroid.d4a',  # optional, for urls support
 
 ]
 
@@ -57,15 +56,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #'ratchet.contrib.django.middleware.RatchetNotifierMiddleware'
 ]
 
-# RATCHET = {
-#     'access_token': '',
-#     'environment': 'typer',
-#     'branch': 'master',
-#     'root': 'G:\\PycharmProjects\\engineer',
-# }
 
 ROOT_URLCONF = 'typer.urls'
 
@@ -94,7 +86,7 @@ WSGI_APPLICATION = 'typer.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'typer',
+        'NAME': 'typer2',
         'USER': 'postgres',
         'PASSWORD': '',
         'HOST': 'localhost',
@@ -134,28 +126,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-# ANDROID = {
-#
-#     'APK': {
-#         'name': "App Name",
-#         'version': '0.1',
-#         'numericversion': 10,
-#         'package': 'com.djangoforandroid.appname',
-#         'icon': os.path.join(BASE_DIR, 'static', 'images', 'icon.png'),
-#     },
-#
-#     'ANDROID': {
-#         'ARCH': 'armeabi-v7a',
-#         'SDK': '/absolute/path/to/android_sdk',
-#         'API': '21',
-#         'CRYSTAX_NDK': '/absolute/path/to/crystax-ndk-10.3.2',
-#         'CRYSTAX_NDK_VERSION': '10.3.2',
-#     },
-# }
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'apk')
@@ -164,6 +135,18 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'apk')
 ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
 LOGIN_REDIRECT_URL = '/'
+
+# Config = ConfigParser()
+#
+# Config.read_file('settings.ini')
+#
+# EMAIL_BACKEND = Config.ConfigSectionMap('Email')['email_backend']
+# EMAIL_HOST = Config.ConfigSectionMap('Email')['email_host']
+# EMAIL_HOST_USER = Config.ConfigSectionMap('Email')['email_host_user']
+# EMAIL_HOST_PASSWORD = Config.ConfigSectionMap('Email')['email_host_password']
+# EMAIL_PORT = Config.ConfigSectionMap('Email')['email_port']
+# EMAIL_USE_TLS = Config.ConfigSectionMap('Email')['email_use_tls']
+# DEFAULT_FROM_EMAIL = Config.ConfigSectionMap('Email')['default_from_email']
 
 #Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
