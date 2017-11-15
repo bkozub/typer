@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-from typer.helpers.ConfigParser import ConfigParser
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -28,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['192.168.1.108','192.168.1.109','192.168.1.100','127.0.0.1']
 
-# AUTH_USER_MODEL = ''
 
 # Application definition
 
@@ -58,7 +56,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-
 ROOT_URLCONF = 'typer.urls'
 
 TEMPLATES = [
@@ -78,7 +75,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'typer.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
@@ -126,7 +122,8 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'apk')

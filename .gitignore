@@ -1,6 +1,6 @@
 #Files:
 *.pyc
-
+typer/settings.ini
 #Folders:
 .idea/
 typer/settings.py
