@@ -149,13 +149,13 @@ LOGIN_REDIRECT_URL = '/'
 # DEFAULT_FROM_EMAIL = Config.ConfigSectionMap('Email')['default_from_email']
 
 #Email settings
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_HOST_USER = 'bartikus1994@gmail.com'
-EMAIL_HOST_PASSWORD = '4ej7ozwr'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = "typer@mytyper.com"
+EMAIL_BACKEND = 'django.core.mail.backendgit sts.smtp.EmailBackend'
+EMAIL_HOST =  '' #for example "smtp.gmail.com"
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = ''
+EMAIL_USE_TLS = '' #True or False
+DEFAULT_FROM_EMAIL = ''
 
 
 STATICFILES_DIRS = [
