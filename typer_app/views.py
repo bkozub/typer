@@ -27,16 +27,6 @@ def update_profile(request):
         user_form = UserForm(request.POST, instance=request.user)
         profile_form = ProfileForm(request.POST, instance=request.user.userprofile)
         if user_form.is_valid() and profile_form.is_valid():
-            # if user_form.changed_data:
-            #     user = User.objects.get(pk=request.user.pk)
-            #     for data in user_form.changed_data:
-            #         user.data = user_form.cleaned_data.get(data)
-            #     user.save
-            # if profile_form.changed_data:
-            #     user_profile = UserProfile.objects.get(pk=request.user.userprofile.pk)
-            #     for data in profile_form.changed_data:
-            #         user_profile.data = profile_form.cleaned_data.get(data)
-            #     user_profile.save
             user_form.save()
             profile_form.save()
             messages.success(request, ('Your profile was successfully updated!'))
