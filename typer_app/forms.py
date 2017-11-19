@@ -5,7 +5,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.forms import extras
 
-from typer_app.models import UserProfile
+from typer_app.models import UserProfile, Competition, Competition_Location
 
 
 class LoginForm(AuthenticationForm):
@@ -26,10 +26,26 @@ class UserForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['location', 'birth_date']
+        fields = ('location', 'birth_date')
         widgets = {
             'birth_date' : extras.SelectDateWidget
         }
+
+class CompetitionForm(forms.ModelForm):
+    class Meta:
+        model = Competition
+        fields = ('comp_date',)
+        widgets = {
+            'comp_date': extras.SelectDateWidget
+        }
+class CompetitionLocationForm(forms.ModelForm):
+    class Meta:
+        model = Competition_Location
+        fields = ('location','nationality',)
+
+
+
+
 
     # birthdate = forms.DateField(widget=extras.SelectDateWidget)
 

@@ -21,7 +21,7 @@ from django.contrib.auth import views
 
 from typer import settings
 from typer_app.forms import LoginForm
-from typer_app.views import update_profile
+from typer_app.views import update_profile, create_competition
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -29,5 +29,6 @@ urlpatterns = [
     url(r'^login/', views.login, {'template_name': 'login.html', 'authentication_form': LoginForm}, name='login'),
     url(r'^logout/', views.logout, {'next_page': '/login'}),
     url(r'^accounts/', include('registration.backends.default.urls')),
-    url(r'^profile/', update_profile)
+    url(r'^profile/', update_profile),
+    url(r'^competition',create_competition),
 ]

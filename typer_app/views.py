@@ -11,8 +11,8 @@ from django.contrib.auth.decorators import login_required
 # view without authenticating
 from registration.forms import User
 
-from typer_app.forms import UserForm, ProfileForm
-from typer_app.models import UserProfile
+from typer_app.forms import UserForm, ProfileForm, CompetitionForm, CompetitionLocationForm
+from typer_app.models import UserProfile, Competition, Competition_Location
 
 
 @login_required(login_url="login/")
@@ -39,4 +39,26 @@ def update_profile(request):
     return render(request, 'profile.html', {
         'user_form': user_form,
         'profile_form': profile_form
+    })
+
+@login_required
+def create_competition(request):
+    if request.method == 'POST':
+        comp_form = CompetitionForm(request.POST)
+        comp_loc_form = CompetitionLocationForm(request.POST)
+        if comp_form.is_valid() and comp_loc_form.is_valid():
+            comp_loc_form.save()
+            comp_form.instance.competition_location = comp_loc_form.instance
+            comp_form.save()
+
+            messages.success(request, ('You created competition!'))
+            return redirect('home')
+        else:
+            messages.error(request, ('Please correct the error below.'))
+    else:
+        comp_form = CompetitionForm()
+        comp_loc_form = CompetitionLocationForm()
+    return render(request, 'competition.html', {
+        'comp_form': comp_form,
+        'comp_loc_form': comp_loc_form
     })
