@@ -57,7 +57,7 @@ class Competition(models.Model):
         ('End','Ended'),
     )
     comp_date = models.DateField(blank=False)
-    competition_location = models.ForeignKey(Competition_Location,unique=True)
+    competition_location = models.OneToOneField(Competition_Location)
     comp_status = models.CharField(max_length=5, choices=COMP_STATUS_CHOICES, default='Pl')
 
 
