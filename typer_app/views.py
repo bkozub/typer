@@ -4,13 +4,19 @@ from django.db import transaction
 from django.shortcuts import redirect
 # Create your views here.
 from django.shortcuts import render
+from rest_framework import viewsets
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.permissions import IsAuthenticated
 
-from typer_app.forms import UserForm, ProfileForm, CompetitionForm, CompetitionLocationForm
+from typer_app.forms import UserForm, ProfileForm, CompetitionForm, CompetitionLocationForm, TypeForm
 
 
 # Create your views here.
 # this login required decorator is to not allow to any
 # view without authenticating
+from typer_app.models import Ski_Jumper, Competition
+from typer_app.serializers import SkyJumperSerializer, CompetitionSerializer
 
 
 @login_required(login_url="login/")
@@ -47,7 +53,7 @@ def create_competition(request):
         comp_loc_form = CompetitionLocationForm(request.POST)
         if comp_form.is_valid() and comp_loc_form.is_valid():
             comp_loc_form.save()
-            comp_form.instance.competition_location = comp_loc_form.instance
+            comp_form.instance.location = comp_loc_form.instance
             comp_form.save()
             messages.success(request, ('You created a competition!'))
             return redirect('home')
@@ -61,3 +67,33 @@ def create_competition(request):
         'comp_loc_form': comp_loc_form
     })
 
+@login_required
+def type(request):
+    if request.method == 'POST':
+        type_form = TypeForm(request.POST, no_place = True, user = request.user)
+        if type_form.is_valid():
+            type_form.instance.user_id = request.user
+            # type_form.fields['place'].choices = PLACE_CHOICES
+            type_form.save()
+            messages.success(request, ('You type a jumper!'))
+            return render(request, 'type.html', {
+                'type_form': type_form
+            })
+        else:
+            messages.error(request, ('Please correct the error below.'))
+    else:
+        type_form = TypeForm()
+    return render(request, 'type.html', {
+        'type_form': type_form
+    })
+
+# @api_view(['GET'])
+# @authentication_classes((SessionAuthentication, BasicAuthentication))
+# @permission_classes((IsAuthenticated,TokenAuthentication,))
+class JumperViewSet(viewsets.ModelViewSet):
+    queryset = Ski_Jumper.objects.all().order_by('pk')
+    serializer_class = SkyJumperSerializer
+
+class CompetitionViewSet(viewsets.ModelViewSet):
+    queryset = Competition.objects.all().order_by('pk')
+    serializer_class = CompetitionSerializer

@@ -4,8 +4,16 @@ from django import forms
 # If you don't do this you cannot use Bootstrap CSS
 from django.contrib.auth.models import User
 from django.forms import extras
+from django.utils.translation import ugettext_lazy as _
+from typer_app.models import UserProfile, Competition, Competition_Location, Type
 
-from typer_app.models import UserProfile, Competition, Competition_Location
+PLACE_CHOICES = (
+    (1, '1'),
+    (1, '2'),
+    (1, '3'),
+    (1, '4'),
+    (1, '5'),
+)
 
 
 class LoginForm(AuthenticationForm):
@@ -15,37 +23,73 @@ class LoginForm(AuthenticationForm):
                                widget=forms.PasswordInput(attrs={'class': 'form-control', 'name': 'password'}))
 
 
-
-
-
 class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'email')
+
 
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('location', 'birth_date')
         widgets = {
-            'birth_date' : extras.SelectDateWidget
+            'birth_date': extras.SelectDateWidget
         }
+
 
 class CompetitionForm(forms.ModelForm):
     class Meta:
         model = Competition
-        fields = ('comp_date',)
+        fields = ('date','status',)
         widgets = {
-            'comp_date': extras.SelectDateWidget
+            'date': extras.SelectDateWidget
         }
+
+
 class CompetitionLocationForm(forms.ModelForm):
     class Meta:
         model = Competition_Location
-        fields = ('location','nationality',)
+        fields = ('location', 'nationality',)
+
+
+class TypeForm(forms.ModelForm):
+    place = forms.ChoiceField(choices=PLACE_CHOICES)
+
+    def __init__(self, *args, **kwargs):
+        no_place = kwargs.get('no_place')
+        user = kwargs.get('user')
+        super(TypeForm, self).__init__(*args, **kwargs)
+        if no_place:
+            self.fields['place'].choices = PLACE_CHOICES[:-1]
+
+    class Meta:
+        PLACE_CHOICES = (
+            (1, '1'),
+            (2, '2'),
+            (3, '3'),
+            (4, '4'),
+            (5, '5'),
+        )
+        model = Type
+        fields = ('place', 'comp_id', 'jumpers',)
+        labels = {
+            'comp_id': _('Competition'),
+            'jumpers': _('Jumper')
+        }
 
 
 
 
 
-    # birthdate = forms.DateField(widget=extras.SelectDateWidget)
 
+
+
+
+
+
+
+
+
+
+        # birthdate = forms.DateField(widget=extras.SelectDateWidget)
