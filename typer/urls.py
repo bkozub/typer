@@ -23,7 +23,8 @@ from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token
 
 from typer import settings
 from typer_app.forms import LoginForm
-from typer_app.views import update_profile, create_competition, type, JumperViewSet, CompetitionViewSet
+from typer_app.views import update_profile, create_competition, type, JumperViewSet, CompetitionViewSet, \
+    UserRankListView, guide, TypesView
 
 router = routers.DefaultRouter()
 router.register(r'v1/jumper', JumperViewSet, base_name="Jumpers"),
@@ -42,5 +43,8 @@ urlpatterns = [
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^profile/', update_profile, name='profile'),
     url(r'^competition/add',create_competition, name='add_competition'),
-    url(r'^type', type, name='type'),
+    url(r'^type/', type, name='type'),
+    url(r'^ranking', UserRankListView.as_view(), name='user_ranking'),
+    url(r'^guide/', guide, name='how_to'),
+    url(r'^usertypes/', TypesView.as_view(), name='user_types'),
 ]

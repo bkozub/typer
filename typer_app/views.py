@@ -4,24 +4,24 @@ from django.db import transaction
 from django.shortcuts import redirect
 # Create your views here.
 from django.shortcuts import render
+from django.views.generic import ListView
 from rest_framework import viewsets
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
-from rest_framework.decorators import api_view, authentication_classes, permission_classes
-from rest_framework.permissions import IsAuthenticated
 
 from typer_app.forms import UserForm, ProfileForm, CompetitionForm, CompetitionLocationForm, TypeForm
-
-
 # Create your views here.
 # this login required decorator is to not allow to any
 # view without authenticating
-from typer_app.models import Ski_Jumper, Competition
+from typer_app.models import Ski_Jumper, Competition, UserProfile, Type
 from typer_app.serializers import SkyJumperSerializer, CompetitionSerializer
 
 
 @login_required(login_url="login/")
 def home(request):
     return render(request, "home.html")
+
+
+def guide(request):
+    return render(request, "how_to.html")
 
 
 @login_required
@@ -70,7 +70,7 @@ def create_competition(request):
 @login_required
 def type(request):
     if request.method == 'POST':
-        type_form = TypeForm(request.POST, no_place = True, user = request.user)
+        type_form = TypeForm(request.POST)
         if type_form.is_valid():
             type_form.instance.user_id = request.user
             # type_form.fields['place'].choices = PLACE_CHOICES
@@ -97,3 +97,20 @@ class JumperViewSet(viewsets.ModelViewSet):
 class CompetitionViewSet(viewsets.ModelViewSet):
     queryset = Competition.objects.all().order_by('pk')
     serializer_class = CompetitionSerializer
+
+class UserRankListView(ListView):
+    model = UserProfile
+    template_name = 'user_rank.html'
+
+    def get_queryset(self):
+        return UserProfile.objects.values('user__username','rank').order_by('-rank')
+
+class TypesView(ListView):
+    model = Type
+    template_name = 'user_types.html'
+
+    def get_queryset(self):
+        return Type.objects.filter(user_id=self.request.user)
+
+
+

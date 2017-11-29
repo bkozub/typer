@@ -56,12 +56,12 @@ class CompetitionLocationForm(forms.ModelForm):
 class TypeForm(forms.ModelForm):
     place = forms.ChoiceField(choices=PLACE_CHOICES)
 
-    def __init__(self, *args, **kwargs):
-        no_place = kwargs.get('no_place')
-        user = kwargs.get('user')
-        super(TypeForm, self).__init__(*args, **kwargs)
-        if no_place:
-            self.fields['place'].choices = PLACE_CHOICES[:-1]
+    # def __init__(self, *args, **kwargs):
+    #     no_place = kwargs.get('no_place')
+    #     user = kwargs.get('user')
+    #     super(TypeForm, self).__init__(*args, **kwargs)
+    #     if no_place:
+    #         self.fields['place'].choices = PLACE_CHOICES[:-1]
 
     class Meta:
         PLACE_CHOICES = (

@@ -35,8 +35,8 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     birth_date = models.DateField(null=True, blank=True)
     location = models.CharField(max_length=30, blank=True)
-    rank = models.CharField(max_length=500,blank=True)
-    type = models.CharField(max_length=500,blank=True)
+    rank = models.IntegerField(max_length=500,blank=True)
+    photo = models.ImageField(upload_to='uploads/profile/{}',blank=True)
 
     @receiver(post_save, sender=User)
     def create_or_update_user_profile(sender, instance, created, **kwargs):
@@ -48,9 +48,10 @@ class UserProfile(models.Model):
 class Competition_Location(models.Model):
     location = models.CharField(max_length=200, blank=False)
     nationality = models.CharField(max_length=200, blank=False,choices=NATIONALITY_CHOICES)
+    photo = models.ImageField(upload_to='uploads/location/{}')
 
     def __str__(self):
-        return 'location: {}'.format(self.location)
+        return '{}'.format(self.location)
 
 
 class Competition(models.Model):
@@ -68,7 +69,7 @@ class Competition(models.Model):
         return reverse('competition-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return '{}'.format(self.location)
+        return '{} {}'.format(self.location,self.date)
 
 
 
@@ -76,7 +77,7 @@ class Ski_Jumper(models.Model):
     name = models.CharField(max_length=200, blank=False)
     surname = models.CharField(max_length=200, blank=False)
     nationality = models.CharField(max_length=3,blank=False,choices=NATIONALITY_CHOICES)
-    photo = models.ImageField(upload_to='uploads/jumpers/{}')
+    photo = models.ImageField(upload_to='uploads/jumpers/{}', blank=True)
     def __str__(self):
         return '{} {}'.format(self.name,self.surname)
 
@@ -85,7 +86,7 @@ class Ski_Jumper(models.Model):
 class Type(models.Model):
 
     user_id = models.ForeignKey(User)
-    comp_id = models.ForeignKey(Competition_Location)
+    comp_id = models.ForeignKey(Competition)
     jumpers = models.ForeignKey(Ski_Jumper)
     place = models.IntegerField()
 
