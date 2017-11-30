@@ -35,7 +35,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     birth_date = models.DateField(null=True, blank=True)
     location = models.CharField(max_length=30, blank=True)
-    rank = models.IntegerField(max_length=500,blank=True)
+    rank = models.IntegerField(max_length=500,blank=True,default=0)
     photo = models.ImageField(upload_to='uploads/profile/{}',blank=True)
 
     @receiver(post_save, sender=User)
@@ -92,9 +92,16 @@ class Type(models.Model):
 
 
 class Result(models.Model):
+    PLACE_CHOICES = (
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+    )
     competition_id = models.ForeignKey(Competition)
     jumper_id = models.ForeignKey(Ski_Jumper)
-    place = models.IntegerField(blank=False)
+    place = models.CharField(max_length=100,blank=False, choices=PLACE_CHOICES)
     score = models.IntegerField(blank=False)
 
     def __str__(self):
