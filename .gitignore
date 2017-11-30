@@ -5,3 +5,4 @@ typer/settings.ini
 #Folders:
 .idea/
 typer/settings.py
+typer_app/migrations

@@ -7,14 +7,6 @@ from django.forms import extras
 from django.utils.translation import ugettext_lazy as _
 from typer_app.models import UserProfile, Competition, Competition_Location, Type
 
-PLACE_CHOICES = (
-    (1, '1'),
-    (1, '2'),
-    (1, '3'),
-    (1, '4'),
-    (1, '5'),
-)
-
 
 class LoginForm(AuthenticationForm):
     username = forms.CharField(label="Username", max_length=30,
@@ -54,6 +46,13 @@ class CompetitionLocationForm(forms.ModelForm):
 
 
 class TypeForm(forms.ModelForm):
+    PLACE_CHOICES = (
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+    )
     place = forms.ChoiceField(choices=PLACE_CHOICES)
 
     # def __init__(self, *args, **kwargs):
@@ -64,13 +63,6 @@ class TypeForm(forms.ModelForm):
     #         self.fields['place'].choices = PLACE_CHOICES[:-1]
 
     class Meta:
-        PLACE_CHOICES = (
-            (1, '1'),
-            (2, '2'),
-            (3, '3'),
-            (4, '4'),
-            (5, '5'),
-        )
         model = Type
         fields = ('place', 'comp_id', 'jumpers',)
         labels = {

@@ -13,11 +13,6 @@ class CompetitionSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Competition
         fields = ('pk','date', 'location', 'status')
-        # extra_kwargs = {
-        #     'url': {'view_name': 'competitions', 'lookup_field': 'location'},
-        #     'competition_location': {'lookup_field': 'location'}
-        # }
-
 
 
 

@@ -21,19 +21,17 @@ from django.contrib.auth import views
 from rest_framework import routers
 from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token
 
-from typer import settings
+from typer import settings, serializers_urls
 from typer_app.forms import LoginForm
 from typer_app.views import update_profile, create_competition, type, JumperViewSet, CompetitionViewSet, \
     UserRankListView, guide, TypesView
 
-router = routers.DefaultRouter()
-router.register(r'v1/jumper', JumperViewSet, base_name="Jumpers"),
-router.register(r'v1/competition', CompetitionViewSet, base_name="Competitions")
+
 
 
 
 urlpatterns = [
-    url(r'^api/', include(router.urls)),
+    url(r'^api/', include(serializers_urls.router.urls)),
     url(r'^api-token-auth/', obtain_jwt_token),
     url(r'^api-token-verify/', verify_jwt_token),
     url(r'^admin/', admin.site.urls),
