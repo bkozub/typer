@@ -1,0 +1,8 @@
+[run]
+omit =
+    *apps.py
+    *migrations/*
+    *front-app/*
+    *urls.py
+    manage.py
+    *wsgi.py
