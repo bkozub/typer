@@ -1,0 +1,68 @@
+<div class="container">
+  <h1>Typer Form</h1>
+  <form #typerForm="ngForm" novalidate>
+    <fieldset >
+      <legend>Competition</legend>
+      <div class="form-group">
+        <label for="place">Competition</label>
+        <select [(ngModel)]="competition" name="competition">
+          <option *ngFor="let competition of competitions" [ngValue]="competition.pk">{{competition.location}} ({{competition.date}})</option>
+        </select>
+      </div>
+    </fieldset> <br>
+
+    <fieldset >
+      <legend>Place nr 1</legend>
+      <div class="form-group">
+        <label for="place">Player</label>
+        <select [(ngModel)]="place_one" name="1">
+          <option *ngFor="let jumper of jumpers" [ngValue]="jumper.pk">{{jumper.name}} {{jumper.surname}}</option>
+        </select>
+      </div>
+      </fieldset> <br>
+
+      <fieldset >
+      <legend>Place nr 2</legend>
+        <div class="form-group">
+          <label for="place">Player</label>
+          <select [(ngModel)]="place_two" name="2"(ngModelChange)="onSelectJumper(place_two)" >
+            <option *ngFor="let jumper of jumpers" [ngValue]="jumper.pk">{{jumper.name}} {{jumper.surname}}</option>
+          </select>
+        </div>
+    </fieldset> <br>
+
+    <fieldset >
+      <legend>Place nr 3</legend>
+        <div class="form-group">
+          <label for="place">Player</label>
+          <select [(ngModel)]="place_three" name="3" (ngModelChange)="onSelectJumper(place_three)">
+            <option *ngFor="let jumper of jumpers" [ngValue]="jumper.pk">{{jumper.name}} {{jumper.surname}}</option>
+          </select>
+        </div>
+      </fieldset> <br>
+
+    <fieldset >
+      <legend>Place nr 4</legend>
+        <div class="form-group">
+          <label for="place">Player</label>
+          <select [(ngModel)]="place_four" name="4">
+            <option *ngFor="let jumper of jumpers" [ngValue]="jumper.pk">{{jumper.name}} {{jumper.surname}}</option>
+          </select>
+        </div>
+      </fieldset> <br>
+
+
+    <fieldset >
+      <legend>Place nr 5</legend>
+        <div class="form-group">
+          <label for="place">Player</label>
+          <select [(ngModel)]="place_five" name="5">
+            <option *ngFor="let jumper of jumpers" [ngValue]="jumper.pk">{{jumper.name}} {{jumper.surname}}</option>
+          </select>
+        </div>
+      </fieldset> <br>    
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+
+  {{typerForm.value | json }}
+</div>

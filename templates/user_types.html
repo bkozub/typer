@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load bootstrap3 %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block content %}
+{% csrf_token %}
+{% for type in object_list %}
+<li>Place: <b>{{type.place}}</b> Competition: <b>{{type.comp_id}}</b> Jumper: <b>{{type.jumpers}}</b></li>
+{% empty %}
+    <li>No types.</li>
+{% endfor %}
+{% endblock %}
+</body>
+</html>
