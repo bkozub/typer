@@ -5,7 +5,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.forms import extras
 from django.utils.translation import ugettext_lazy as _
-from typer_app.models import UserProfile, Competition, Competition_Location, Type
+from typer_app.models import UserProfile, Competition, Competition_Location, Type, Result
 
 
 class LoginForm(AuthenticationForm):
@@ -54,13 +54,6 @@ class TypeForm(forms.ModelForm):
         (5, '5'),
     )
     place = forms.ChoiceField(choices=PLACE_CHOICES)
-
-    # def __init__(self, *args, **kwargs):
-    #     no_place = kwargs.get('no_place')
-    #     user = kwargs.get('user')
-    #     super(TypeForm, self).__init__(*args, **kwargs)
-    #     if no_place:
-    #         self.fields['place'].choices = PLACE_CHOICES[:-1]
 
     class Meta:
         model = Type

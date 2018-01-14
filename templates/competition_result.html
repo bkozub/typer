@@ -11,14 +11,15 @@
 <body>
 {% block content %}
 {% csrf_token %}
-<ul id="typed_jumpers">
-{% for type in object_list %}
-<li>Place: <b>{{type.place}}</b> Competition: <b>{{type.comp_id}}</b> Jumper: <b>{{type.jumpers}}</b></li>
+<h1>Competitions</h1>
+<ol type="1">
+{% for result in object_list %}
+    <a href="{% url 'competition_results_detail' pk=result.competition_id_id %}"> {{result.competition_id}}</a></li>
+    <br>
 {% empty %}
-    <li>No types.</li>
+    <li>No user.</li>
 {% endfor %}
-</ul>
+</ol>
 {% endblock %}
-
 </body>
 </html>
