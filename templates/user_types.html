@@ -11,11 +11,14 @@
 <body>
 {% block content %}
 {% csrf_token %}
+<ul id="typed_jumpers">
 {% for type in object_list %}
 <li>Place: <b>{{type.place}}</b> Competition: <b>{{type.comp_id}}</b> Jumper: <b>{{type.jumpers}}</b></li>
 {% empty %}
     <li>No types.</li>
 {% endfor %}
+</ul>
 {% endblock %}
+
 </body>
 </html>

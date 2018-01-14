@@ -64,7 +64,7 @@ class Competition(models.Model):
     )
     date = models.DateField(blank=False)
     location = models.OneToOneField(Competition_Location)
-    status = models.CharField(max_length=15, choices=COMP_STATUS_CHOICES, default='Pl')
+    status = models.CharField(max_length=15, choices=COMP_STATUS_CHOICES, default='Created')
 
     def get_absolute_url(self):
         return reverse('competition-detail', kwargs={'pk': self.pk})
@@ -85,11 +85,18 @@ class Ski_Jumper(models.Model):
 
 
 class Type(models.Model):
+    PLACE_CHOICES = (
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+    )
 
     user_id = models.ForeignKey(User)
     comp_id = models.ForeignKey(Competition)
     jumpers = models.ForeignKey(Ski_Jumper)
-    place = models.IntegerField()
+    place = models.IntegerField(max_length=100, blank=False, choices=PLACE_CHOICES)
 
 
 class Result(models.Model):

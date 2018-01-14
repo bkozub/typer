@@ -62,13 +62,6 @@ class TypeForm(forms.ModelForm):
             'comp_id': _('Competition'),
             'jumpers': _('Jumper')
         }
-class SelectCompetitionResultForm(forms.ModelForm):
-    class Meta:
-        model = Result
-        fields = ('competition_id', )
-        labels = {
-            'competition_id' : _('Competition')
-        }
 
 
 
