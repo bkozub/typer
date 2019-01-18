@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% load bootstrap3 %}
+
+
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="jumbotron">
+            <h1><center>How to type - Guide</center></h1>
+            <ul>
+                <li type="1">
+                    Login or register in Typer application.
+                </li>
+                <li type="1">
+                    Click 'Type' on the top bar of web page, select place, competition and sky jumper.
+                </li>
+                <li type="1">
+                    You can choose only first five place of competition.
+                </li>
+                <li type="1">
+                    If you wanna see your types, click 'Account' on the right corner of screen and select correct option
+                    from dropdown list.
+                </li>
+                <li type="1">
+                    Typing is closed 5 minutes before the start of the competition.
+                </li>
+                <li type="1">
+                    Typing is closed 5 minutes before the start of the competition.
+                </li>
+                <li type="1">
+                    The rules for awarding points:
+                </li>
+                    <ul>
+                        <li>Proper selection of a player from the top five jumping competition, who took exactly the place that
+                            the user indicated -<font color="green">5 points</font>;
+                        </li>
+                        <li>
+                            Predict the top five jumping contestants in the top five but in a different position than the one
+                            indicated by the user -<font color="green">2 points</font>;
+                        </li>
+                        <li>
+                            Correct indication of the winner of the jumping contest -<font color="green">additional 3 points</font>;
+                        </li>
+                    </ul>
+                <li type="1">
+                    The results will be given within 1 day after the competition.
+                </li>
+
+
+
+
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
