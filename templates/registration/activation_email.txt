@@ -1,0 +1,8 @@
+Greetings
+You just up for an account at {{site.name}}. Please click link below to activate it:
+
+http://{{site.domain}}{$ url 'registration_activate' activation_key %}
+
+This link is valid for {{expiration_days}}. If it wasn't you just ignore this e-mail.
+
+-- Typer Team

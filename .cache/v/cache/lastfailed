@@ -1,0 +1,10 @@
+{
+  "front-app/node_modules/node-gyp/gyp/pylib/gyp/MSVSSettings_test.py": true,
+  "front-app/node_modules/node-gyp/gyp/pylib/gyp/common_test.py": true,
+  "front-app/node_modules/node-gyp/gyp/pylib/gyp/easy_xml_test.py": true,
+  "front-app/node_modules/node-gyp/gyp/pylib/gyp/generator/msvs_test.py": true,
+  "front-app/node_modules/node-gyp/gyp/pylib/gyp/generator/ninja_test.py": true,
+  "front-app/node_modules/node-gyp/gyp/pylib/gyp/generator/xcode_test.py": true,
+  "front-app/node_modules/node-gyp/gyp/pylib/gyp/input_test.py": true,
+  "typer_app/tests/test_views.py::TestMainView::()::test_home_view": true
+}

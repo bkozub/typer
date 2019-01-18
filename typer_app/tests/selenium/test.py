@@ -64,11 +64,5 @@ class SeleniumTestTypes(unittest.TestCase):
         self.assertIn("Stefan Kraft",type.text)
         self._test_logout(self,driver)
 
-
-
 if __name__ == "__main__":
     unittest.main()
-
-
-
-
