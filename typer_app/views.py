@@ -126,3 +126,4 @@ class CompetitionResultView(ListView):
 
     def get_queryset(self):
         return Result.objects.all().distinct('competition_id')
+

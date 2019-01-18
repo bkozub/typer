@@ -14,7 +14,7 @@ class TestMainView(TestCase):
 
     def test_user_profile_create_signal(self):
         self.user.save()
-        self.assertIn(self.user.id,UserProfile.objects.values_list('user',flat=True))
+        self.assertIn(self.user.id, UserProfile.objects.values_list('user', flat=True))
 
 
 if __name__ == "__main__":
